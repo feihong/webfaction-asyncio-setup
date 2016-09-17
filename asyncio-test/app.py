@@ -12,7 +12,7 @@ app = web.Application()
 
 async def index(request):
     path = Path(__file__).parent / 'static/index.html'
-    return web.Response(body=path.read_bytes())
+    return web.Response(content_type='text/html', body=path.read_bytes())
 
 
 async def websocket_handler(request):

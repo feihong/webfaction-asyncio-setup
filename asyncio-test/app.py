@@ -40,14 +40,19 @@ async def count(sockets, name, stop):
         for ws in sockets:
             ws.send_str(data)
         await asyncio.sleep(1.0)
-        
+
 
 def main():
     app.sockets = set()
-    # app['count_task'] = None
     app.router.add_route('GET', '/', index)
     app.router.add_route('GET', '/websocket/', websocket_handler)
     app.router.add_static('/static/', Path(__file__).parent / 'static')
+
+    async def shutdown_callback(_):
+        for ws in app.sockets:
+            await ws.close()
+
+    app.on_shutdown.append(shutdown_callback)
     web.run_app(app)
 
 

@@ -1,4 +1,5 @@
 import asyncio
+import sys
 import json
 import random
 from pathlib import Path
@@ -43,6 +44,11 @@ async def count(sockets, name, stop):
 
 
 def main():
+    if len(sys.argv) >= 2:
+        port = int(sys.argv[1])
+    else:
+        port = 8080
+
     app.sockets = set()
     app.router.add_route('GET', '/', index)
     app.router.add_route('GET', '/websocket/', websocket_handler)
@@ -53,7 +59,7 @@ def main():
             await ws.close()
 
     app.on_shutdown.append(shutdown_callback)
-    web.run_app(app)
+    web.run_app(app, port=port)
 
 
 if __name__ == '__main__':

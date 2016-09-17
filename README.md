@@ -12,6 +12,16 @@ Go to the Websites page and click the `Create new application` button. Set the f
 - App type: Custom websockets app (listening on port)
 - URL: asyncio-test
 
+After creating the Custom websockets app, make a note of the port.
+
+# Install supervisor
+
+```
+pip2.7 install supervisor
+```
+
+You have to use Python 2.7 because supervisor does not yet run under Python 3.
+
 # Install your code
 
 ```

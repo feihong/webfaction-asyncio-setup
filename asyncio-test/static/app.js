@@ -1,6 +1,7 @@
 'use strict';
 
-let ws = new WebSocket('ws://' + window.location.host + '/websocket/')
+let loc = document.location
+let ws = new WebSocket('ws://' + loc.host + loc.pathname + 'websocket/')
 
 ws.onopen = () => {
   console.log('Websocket opened');

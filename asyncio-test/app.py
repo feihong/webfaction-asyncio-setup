@@ -55,6 +55,7 @@ def main():
     app.router.add_static('/static/', Path(__file__).parent / 'static')
 
     async def shutdown_callback(_):
+        "Close all sockets so that the app can quit right away."
         for ws in app.sockets:
             await ws.close()
 
